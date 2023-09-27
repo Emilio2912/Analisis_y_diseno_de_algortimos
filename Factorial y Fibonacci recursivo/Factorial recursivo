@@ -1,0 +1,10 @@
+n = int(input("Ingrese el número del que desea obtener el factorial: "))
+
+def fact(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * fact(n-1)
+
+num_facto = fact(n)
+print("El factorial de" , n,"es: " , num_facto)
