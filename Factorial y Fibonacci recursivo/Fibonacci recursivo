@@ -1,0 +1,10 @@
+n = int(input("Ingrese el número de la serie de Fibonacci que desea encontrar:"))
+
+def fibo(n):
+    if n <= 1:
+        return n
+    else:
+        return fibo(n-2) + fibo(n-1)
+
+result = fibo(n)
+print("El número en la posición", n, "es:", result)
