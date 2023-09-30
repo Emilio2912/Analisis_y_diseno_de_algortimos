@@ -1,0 +1,14 @@
+def hanoi(n, origen, destino, apoyo):
+    if n == 1:
+        print(f"Mover disco 1 desde el tubo {origen} al tubo {destino}")
+        return
+    hanoi(n-1, origen, apoyo, destino)
+    print(f"Mover disco {n} desde el tubo {origen} al tubo {destino}")
+    hanoi(n-1, apoyo, destino, origen)
+
+n = int(input("Ingresar el número de discos: "))
+
+if n <= 0:
+    print("El número de discos debe ser mayor que cero.")
+else:
+    hanoi(n, 'A', 'C', 'B') 
