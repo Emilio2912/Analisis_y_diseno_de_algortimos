@@ -1,0 +1,22 @@
+def burbuja_iterativa(arr):
+    # Obetenemos la longitud de la lista
+    n = len(arr)
+
+    # Recorremos todos los elemntos de la lista
+    for i in range(n):
+        # Los últimos i elementos ya están ordenados, por lo que no es necesario usarlos más
+        for j in range(0, n - i - 1):
+            # Comparamos los adyacentes
+            if arr[j] > arr[j + 1]:
+                # Si el elemento que estamos comparando es mayor que el que sigue, se tienen que intercambiar
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+# Ejemplo
+lista = [5,3,8,4,6]
+print(f"Lista sin ordenar:", lista)
+
+# Llamamos a la funcion para ordenar la lista 
+burbuja_iterativa(lista)
+
+# Se imprime la lista ordenada
+print("Lista ordenada:", lista)
