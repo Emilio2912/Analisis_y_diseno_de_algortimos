@@ -1,0 +1,71 @@
+import heapq
+import time
+
+class Grafo:
+    def __init__(self):
+        self.vertices = set()
+        self.aristas = {}
+
+    def agregar_vertice(self, vertice):
+        self.vertices.add(vertice)
+        self.aristas[vertice] = []
+
+    def agregar_arista(self, inicio, fin, peso):
+        self.aristas[inicio].append((fin, peso))
+
+def dijkstra(grafo, inicio):
+    distancias = {vertice: float('inf') for vertice in grafo.vertices}
+    distancias[inicio] = 0
+    prioridad = [(0, inicio)]
+
+    while prioridad:
+        distancia_actual, vertice_actual = heapq.heappop(prioridad)
+
+        if distancia_actual > distancias[vertice_actual]:
+            continue
+
+        for vecino, peso in grafo.aristas[vertice_actual]:
+            distancia = distancia_actual + peso
+
+            if distancia < distancias[vecino]:
+                distancias[vecino] = distancia
+                heapq.heappush(prioridad, (distancia, vecino))
+
+    return distancias
+
+def medir_tiempo_ejecucion(func, *args):
+    inicio_tiempo = time.time()
+    resultado = func(*args)
+    fin_tiempo = time.time()
+    tiempo_ejecucion = fin_tiempo - inicio_tiempo
+    return resultado, tiempo_ejecucion
+
+# Crear un grafo de ejemplo
+g5 = Grafo()
+g5.agregar_vertice('A')
+g5.agregar_vertice('B')
+g5.agregar_vertice('C')
+g5.agregar_vertice('D')
+g5.agregar_vertice('E')
+g5.agregar_vertice('F')
+g5.agregar_vertice('G')
+g5.agregar_vertice('H')
+g5.agregar_vertice('I')
+g5.agregar_arista('A', 'B', 3)
+g5.agregar_arista('B', 'C', 7)
+g5.agregar_arista('C', 'D', 10)
+g5.agregar_arista('D', 'E', 2)
+g5.agregar_arista('E', 'F', 6)
+g5.agregar_arista('F', 'G', 8)
+g5.agregar_arista('G', 'H', 5)
+g5.agregar_arista('H', 'I', 4)
+g5.agregar_arista('A', 'I', 15)
+
+vertice_inicio5 = 'A'
+resultado5, tiempo5 = medir_tiempo_ejecucion(dijkstra, g5, vertice_inicio5)
+
+print(f"Caminos mínimos desde {vertice_inicio5}:")
+for vertice, distancia in resultado5.items():
+    print(f"Vértice {vertice}: Distancia {distancia}")
+
+print(f"Tiempo de ejecución: {tiempo5} segundos")
